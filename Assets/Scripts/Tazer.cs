@@ -20,7 +20,7 @@ public class Tazer : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-		
+		//when player fires tazer
         if(Input.GetButton("Fire1") && Time.time >= nextTimeToFire)
         {
             nextTimeToFire = Time.time + 3f / firerate;
@@ -30,13 +30,15 @@ public class Tazer : MonoBehaviour
 
     void Shoot()
     {
+        //plays particle effect
         muzzleFlash.Play();
+
 
         RaycastHit hit;
         if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range))
         {
             Debug.Log(hit.transform.name);
-
+            //determins what happens based of tag
            Guard guard = hit.transform.GetComponent<Guard>();
            if(guard != null && ammo == 1)
            {

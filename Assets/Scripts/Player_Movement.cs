@@ -63,7 +63,6 @@ public class Player_Movement : MonoBehaviour
     {
 
         Time.timeScale = 1;
-        //gamePaused = true;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
 

@@ -5,6 +5,7 @@ using TMPro;
 
 public class Keypad : MonoBehaviour
 {
+    //keypad Buttons assignment
     public TMP_InputField numHolder;
     public GameObject B1;
     public GameObject B2;
@@ -78,6 +79,8 @@ public class Keypad : MonoBehaviour
         numHolder.text = null;
     }
 
+    //if text field is the same as in "numHolder"
+    //will allow the player to go continue 
     public void entrEvent()
     {
         if (numHolder.text == "1234")

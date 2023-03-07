@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class Guard : MonoBehaviour
 {
-
+    //sets up the AI states
     public NavMeshAgent guard;
     public Transform player;
     public LayerMask whatisground,whatisplayer;
@@ -29,13 +29,15 @@ public class Guard : MonoBehaviour
 
     void Update()
     {
-        //looks for player in sight
+        //creates a circle checking for when player is close
         PlayerInSightRange = Physics.CheckSphere(transform.position, sightrange, whatisplayer);
 
+        //if player is not in sight
         if(!PlayerInSightRange)
         {
             Patrolling();
         }
+        //if player is in sight
         if(PlayerInSightRange)
         {
             Chaseplayer();
@@ -79,22 +81,28 @@ public class Guard : MonoBehaviour
 
     private void Chaseplayer()
     {
-        //in the name
+        //grabs current player position and walk to it
         guard.SetDestination(player.position);
     }
     
     public void TakeDamage()
     {
+        //when AI is shot stops the AI from working
         StartCoroutine(freeze());
     }
 
     public void slowDamage()
     {
+        /*
+        if AI has already been stopped instead the ai speed will 
+        start going up by a factor of 1
+        */
         guard.speed = guard.speed + 1;
     }
 
     void OnTriggerEnter()
     {
+        //when AI collids with player elims player and triggers lose scene
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
         SceneManager.LoadScene(sceneBuildIndex: 3);
@@ -102,6 +110,7 @@ public class Guard : MonoBehaviour
 
     IEnumerator freeze()
     {
+        //stops ai for 5 sec and then goes back to regular script
         guard.enabled = false;
         yield return new WaitForSeconds(5f);
         guard.enabled = true;
