@@ -1,0 +1,4 @@
+repository "Jewel Steal@Gamehalick34@cloud"
+  path "/"
+    br "/main"
+    co "/main"
